@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             x:Class="Scorer.App"
+             xmlns:local="clr-namespace:Scorer"
+             xmlns:utils="clr-namespace:Scorer.Utilities"
+             xmlns:apphelper="clr-namespace:Scorer">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" x:Key="HeaderLabelStyle">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="InputTransparent" Value="true"/>
+                <Setter Property="FontSize" Value="{apphelper:ScaleFontSize Value=30}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="PointValueLabelStyle">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Margin" Value="{apphelper:ScaleThickness Value='0,-30,0,0'}"/>
+                 <Setter Property="LineHeight" Value=".8"/>
+                <Setter Property="InputTransparent" Value="true"/>
+                <Setter Property="FontSize" Value="{apphelper:ScaleFontSize Value=150}"/>
+            </Style>
+             <Style TargetType="Label" x:Key="DFHeaderLabelStyle">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Margin" Value="{apphelper:ScaleThickness Value='0,-3,0,-2'}"/>
+                <Setter Property="InputTransparent" Value="true"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontSize" Value="{apphelper:ScaleFontSize Value=25}"/>
+            </Style>
+            <Style TargetType="Label" x:Key="DFLabelStyle">
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Margin" Value="{apphelper:ScaleThickness Value='0,-15,0,0'}"/>
+                <Setter Property="FontSize" Value="{apphelper:ScaleFontSize Value=65}"/>
+                <Setter Property="InputTransparent" Value="true"/>
+            </Style>
+            <Style TargetType="Button" x:Key="RoundButtonButtonStyle">
+                <Setter Property="WidthRequest" Value="{apphelper:ScaleWidthDouble Value=75}"/>
+                <Setter Property="HeightRequest" Value="{apphelper:ScaleHeightDouble Value=82}"/>
+                <Setter Property="Padding" Value="{apphelper:ScaleThickness Value='0,-10,0,0'}"/>
+                <Setter Property="FontSize" Value="{apphelper:ScaleFontSize Value=80}"/>
+                <Setter Property="TextColor" Value="White"/>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" 
+             x:Class="Scorer.MainPage"
+             xmlns:local="clr-namespace:Scorer"
+             xmlns:utils="clr-namespace:Scorer.Utilities"
+             xmlns:apphelper="clr-namespace:Scorer" BackgroundColor="Black">
+    <Grid RowSpacing="{apphelper:ScaleHeightDouble Value=10}" 
+          ColumnSpacing="{apphelper:ScaleHeightDouble Value=10}" 
+          BackgroundColor="Transparent"
+          HorizontalOptions="Center" VerticalOptions="Fill">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="{apphelper:ScaleGridHeight Value=186}"/>
+            <RowDefinition Height="{apphelper:ScaleGridHeight Value=81}"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="{apphelper:ScaleGridWidth Value=66}" />
+            <ColumnDefinition Width="{apphelper:ScaleGridWidth Value=66}" />
+            <ColumnDefinition Width="{apphelper:ScaleGridWidth Value=264}" />
+            <ColumnDefinition Width="{apphelper:ScaleGridWidth Value=66}" />
+            <ColumnDefinition Width="{apphelper:ScaleGridWidth Value=66}" />
+        </Grid.ColumnDefinitions>
+        <!-- BLUE Point -->
+        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.BLUE_COLOR}" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="Handle_Tapped" NumberOfTapsRequired="1" Command="{Binding BlueTeamPointsTapped}" CommandParameter="0" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="POINTS"  Style="{StaticResource HeaderLabelStyle}" 
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"  />
+            <Label Text="{Binding RoundScoreData.BlueTeamPoints}"  Style="{StaticResource PointValueLabelStyle}" BackgroundColor="Transparent"
+                   HorizontalOptions="Center" VerticalTextAlignment="Start"/>
+        </StackLayout>
+        <!-- D -->
+        <StackLayout Grid.Row="1" Grid.Column="0"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.BLUE_COLOR}" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding BlueTeamPointsTapped}" CommandParameter="1" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="D" Style="{StaticResource DFHeaderLabelStyle}"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding RoundScoreData.BlueTeamDPoints}" Style="{StaticResource DFLabelStyle}"
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        
+        <!-- F -->
+        <StackLayout Grid.Row="1" Grid.Column="1"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.BLUE_COLOR}" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding BlueTeamPointsTapped}" CommandParameter="2" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="F" Style="{StaticResource DFHeaderLabelStyle}"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding RoundScoreData.BlueTeamFPoints}" Style="{StaticResource DFLabelStyle}"
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        
+        <!-- TIMER -->
+        <StackLayout Grid.RowSpan="2" Grid.Column="2" 
+                     HorizontalOptions="Center" VerticalOptions="Center"
+                     Spacing="{apphelper:ScaleHeightDouble Value=10}" >
+            <Frame BackgroundColor="White" Padding="0" CornerRadius="0"
+                   WidthRequest="{local:ScaleWidthDouble Value=233}" 
+                   VerticalOptions="Start">
+                
+                <Frame.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PlayStopTapped}" NumberOfTapsRequired="1" />
+                </Frame.GestureRecognizers>
+                <Grid RowSpacing="0" ColumnSpacing="0" >
+                    <Grid.RowDefinitions >
+                        <RowDefinition Height="{local:ScaleGridHeight Value=28}" />
+                        <RowDefinition Height="{local:ScaleGridHeight Value=62}" />
+                    </Grid.RowDefinitions>
+                    <Label x:Name="timerHeader" Grid.Row="0" Text="TIMER" Style="{StaticResource HeaderLabelStyle}"
+                           HorizontalOptions="Center" TextColor="Black"
+                           VerticalOptions="Center"
+                           Margin="{local:ScaleThickness Value='0,-6,0,0'}"/>
+                    <ContentView Grid.Row="1" IsVisible="false" BackgroundColor="Green"
+                                 Margin="{local:ScaleThickness Value='8,-2,8,2'}">
+                        <ContentView.Triggers>
+                            <DataTrigger TargetType="ContentView" Binding="{Binding TimerStarting}" Value="true">
+                                <Setter Property="IsVisible" Value="true" />
+                            </DataTrigger>
+                        </ContentView.Triggers>
+                    </ContentView>
+                    <ContentView x:Name="timerContentView" Grid.Row="1" BackgroundColor="Black" 
+                                HorizontalOptions="Fill" IsClippedToBounds="true"
+                                 VerticalOptions="Start"
+                                 Padding="0"
+                                 HeightRequest="{local:ScaleHeightDouble Value=58}"
+                                 Margin="{local:ScaleThickness Value='10,0,10,4'}">
+                        <Label x:Name="timerLabel" Text="{Binding RoundScoreData.TimerString}" 
+                            BackgroundColor="Transparent"
+                            TextColor="White"
+                            FontSize="{apphelper:ScaleFontSize Value=70}"
+                            Margin="{local:ScaleThickness Value='0,-18,0,0'}"
+                            HorizontalOptions="Center" VerticalOptions="Center">
+                        </Label>
+                    </ContentView>
+                </Grid>
+            </Frame>
+            <Label Text="ROUND"  Style="{StaticResource HeaderLabelStyle}" 
+                   HorizontalOptions="Center" VerticalTextAlignment="Center" 
+                   Margin="{local:ScaleThickness Value='0,-7,0,-6'}"/>
+            <StackLayout HorizontalOptions="Center"
+                         Orientation="Horizontal"
+                         Spacing="{apphelper:ScaleHeightDouble Value=10}" >
+                <Button Text="1" BackgroundColor="Red"
+                        TextColor="White"
+                        Style="{StaticResource RoundButtonButtonStyle}"
+                        Command="{Binding RoundTapped}" CommandParameter="1">
+                     <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="1">
+                            <Setter Property="BorderWidth" Value="{local:ScaleHeightDouble Value=2}" />
+                            <Setter Property="BorderColor" Value="Green" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="2"  TextColor="Black"
+                        BackgroundColor="White" 
+                        Style="{StaticResource RoundButtonButtonStyle}"
+                        Command="{Binding RoundTapped}" CommandParameter="2">
+                     <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="2">
+                            <Setter Property="BorderWidth" Value="{local:ScaleHeightDouble Value=2}" />
+                            <Setter Property="BorderColor" Value="Green" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+                <Button Text="3"  TextColor="White"
+                        BackgroundColor="#181818" 
+                        Style="{StaticResource RoundButtonButtonStyle}"
+                        Command="{Binding RoundTapped}" CommandParameter="3">
+                     <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="3">
+                            <Setter Property="BorderWidth" Value="{local:ScaleHeightDouble Value=2}" />
+                            <Setter Property="BorderColor" Value="Green" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+            </StackLayout>
+            <Button Text="Reset" BackgroundColor="Red"
+                    TextColor="White"
+                    WidthRequest="{apphelper:ScaleWidthDouble Value=223}"
+                    HeightRequest="{apphelper:ScaleHeightDouble Value=49}"
+                    Padding="{local:ScaleThickness Value='0,-5,0,0'}"
+                    FontSize="{apphelper:ScaleFontSize Value=45}" Command="{Binding ResetTimerTapped}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="1">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="BackgroundColor" Value="Red" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="2">
+                        <Setter Property="TextColor" Value="Black" />
+                        <Setter Property="BackgroundColor" Value="White" />
+                    </DataTrigger>
+                    <DataTrigger TargetType="Button" Binding="{Binding Round}" Value="3">
+                        <Setter Property="TextColor" Value="White" />
+                        <Setter Property="BackgroundColor" Value="#181818" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
+        </StackLayout>
+        
+        <!-- RED Point -->
+        <StackLayout Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.RED_COLOR}">
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding RedTeamPointsTapped}" CommandParameter="0" />
+            </StackLayout.GestureRecognizers>
+             <Label Text="POINTS"  Style="{StaticResource HeaderLabelStyle}"
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"  />
+            <Label Text="{Binding RoundScoreData.RedTeamPoints}"  Style="{StaticResource PointValueLabelStyle}" 
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="Center" VerticalTextAlignment="Start"/>
+        </StackLayout>
+        <!-- D -->
+        <StackLayout Grid.Row="1" Grid.Column="3"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.RED_COLOR}" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding RedTeamPointsTapped}" CommandParameter="1" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="D" Style="{StaticResource DFHeaderLabelStyle}"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding RoundScoreData.RedTeamDPoints}" Style="{StaticResource DFLabelStyle}"
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        
+        <!-- F -->
+        <StackLayout Grid.Row="1" Grid.Column="4"
+                     Spacing="0" Orientation="Vertical"
+                     HorizontalOptions="Fill" VerticalOptions="Fill"
+                     BackgroundColor="{Static utils:Constants.RED_COLOR}" >
+            <StackLayout.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding RedTeamPointsTapped}" CommandParameter="2" />
+            </StackLayout.GestureRecognizers>
+            <Label Text="F" Style="{StaticResource DFHeaderLabelStyle}"
+                   HorizontalOptions="Center"/>
+            <Label Text="{Binding RoundScoreData.RedTeamFPoints}" Style="{StaticResource DFLabelStyle}"
+                   HorizontalOptions="Center" VerticalTextAlignment="Center"/>
+        </StackLayout>
+        <Label Grid.Row="2" Grid.ColumnSpan="5" Text="Arnis Scoring System"  Style="{StaticResource HeaderLabelStyle}" 
+                   HorizontalOptions="Center" VerticalTextAlignment="Start" 
+                   Margin="{local:ScaleThickness Value='0,-10,0,0'}"/>
+    </Grid>
+</ContentPage>
